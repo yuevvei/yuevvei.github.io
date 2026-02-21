@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+  <html>
+  <head><title>Confirming your account...</title></head>
+  <body>
+    <p id="msg">Confirming your account...</p>
+    <script>
+      // The confirmation link looks like:
+      // https://courtcamper.com/auth/confirm#access_token=...&type=signup...
+      // Supabase puts the tokens in the URL fragment (after #)
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+
+      if (params.get('error')) {
+        document.getElementById('msg').textContent =
+          'Confirmation failed: ' + params.get('error_description');
+      } else if (params.get('access_token')) {
+        document.getElementById('msg').textContent =
+          'Account confirmed! You can now open Court Camper and sign in.';
+      } else {
+        // Token hash flow (from custom email template)
+        const tokenHash = new URLSearchParams(window.location.search).get('token_hash');
+        const type = new URLSearchParams(window.location.search).get('type');
+        if (tokenHash) {
+          fetch('https://ttfwxjpspkothpfifjrz.supabase.co/auth/v1/verify?' +
+            'token_hash=' + tokenHash + '&type=' + type,
+            { method: 'GET' })
+            .then(r => {
+              document.getElementById('msg').textContent =
+                r.ok ? 'Account confirmed! You can now open Court Camper and sign in.'
+                     : 'Confirmation failed. The link may have expired.';
+            });
+        }
+      }
+    </script>
+  </body>
+  </html>
