@@ -1,36 +1,331 @@
 <!DOCTYPE html>
-  <html>
-  <head><title>Confirming your account...</title></head>
-  <body>
-    <p id="msg">Confirming your account...</p>
-    <script>
-      // The confirmation link looks like:
-      // https://courtcamper.com/auth/confirm#access_token=...&type=signup...
-      // Supabase puts the tokens in the URL fragment (after #)
-      const hash = window.location.hash.substring(1);
-      const params = new URLSearchParams(hash);
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Basketball team management app for competitive youth basketball teams. Rosters, live game stats, events, chat, media, and season analytics.">
+  <title>Court Camper — Basketball Team Management</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      if (params.get('error')) {
-        document.getElementById('msg').textContent =
-          'Confirmation failed: ' + params.get('error_description');
-      } else if (params.get('access_token')) {
-        document.getElementById('msg').textContent =
-          'Account confirmed! You can now open Court Camper and sign in.';
-      } else {
-        // Token hash flow (from custom email template)
-        const tokenHash = new URLSearchParams(window.location.search).get('token_hash');
-        const type = new URLSearchParams(window.location.search).get('type');
-        if (tokenHash) {
-          fetch('https://ttfwxjpspkothpfifjrz.supabase.co/auth/v1/verify?' +
-            'token_hash=' + tokenHash + '&type=' + type,
-            { method: 'GET' })
-            .then(r => {
-              document.getElementById('msg').textContent =
-                r.ok ? 'Account confirmed! You can now open Court Camper and sign in.'
-                     : 'Confirmation failed. The link may have expired.';
-            });
-        }
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --bg-subtle: #FAFAFA;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .accent {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .cta:active {
+      transform: translateY(0);
+    }
+
+    .cta-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .cta-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .cta-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .cta-secondary:hover {
+      border-color: #ccc;
+    }
+
+    /* ---- Features ---- */
+    .features {
+      padding: 40px 24px 80px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .features > p {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 1.05rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 120px 20px 60px;
       }
-    </script>
-  </body>
-  </html>
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .features h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        padding: 22px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="nav-brand">
+      <span>&#127936;</span> Court Camper
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Basketball team management for <span class="accent">competitive youth teams</span></h1>
+    <p>Rosters, live game stats, shot charts, events, team chat, media albums, and season analytics — everything your program needs in one app.</p>
+    <div class="cta-group">
+      <a href="#" class="cta cta-primary">&#63743; App Store</a>
+      <a href="#" class="cta cta-secondary">&#9654;&#65039; Google Play</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Everything your team needs</h2>
+    <p>Built by coaches, for coaches — from tryouts to tournament time.</p>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <span class="feature-icon">&#128101;</span>
+        <h3>Team Management</h3>
+        <p>Rosters with player profiles, photos, and positions. Staff roles, guardian accounts, and fan invite codes to keep everyone connected.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">&#128202;</span>
+        <h3>Live Game Stats</h3>
+        <p>Track plays in real time with a courtside-friendly interface. Box scores, shot charts, plus-minus, and efficiency — all calculated automatically.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">&#128197;</span>
+        <h3>Events &amp; Calendar</h3>
+        <p>Games, practices, and meetings on a shared calendar. RSVP tracking, arrival times, location maps, and repeating event support.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">&#128172;</span>
+        <h3>Team Chat</h3>
+        <p>Real-time messaging with pinned messages, inline polls, and clickable links. Keep parents, players, and coaches in the loop.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">&#128247;</span>
+        <h3>Media Albums</h3>
+        <p>Share game-day photos and YouTube highlights. Organized by album with likes, event linking, and a full-screen photo viewer.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">&#128200;</span>
+        <h3>Season Analytics</h3>
+        <p>Performance trends, radar charts, player comparisons, and leaderboards across the full season. Share stats as images with one tap.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Court Camper. All rights reserved.
+  </footer>
+
+</body>
+</html>
