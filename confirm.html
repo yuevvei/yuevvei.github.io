@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Confirmed — Court Camper</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .card {
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+    }
+
+    .icon-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .icon-circle svg {
+      width: 40px;
+      height: 40px;
+      color: var(--primary);
+    }
+
+    .card h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--primary);
+      color: #fff;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Error state (hidden by default) */
+    .error-state { display: none; }
+
+    body.has-error .success-state { display: none; }
+    body.has-error .error-state { display: block; }
+
+    .error-state .icon-circle {
+      background: #FEE2E2;
+    }
+
+    .error-state .icon-circle svg {
+      color: #DC2626;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-brand">
+      <span>&#127936;</span> Court Camper
+    </a>
+  </nav>
+
+  <main>
+    <div class="card">
+      <!-- Success -->
+      <div class="success-state">
+        <div class="icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </div>
+        <h1>You're all set!</h1>
+        <p>Your account has been confirmed. Open the app and sign in to get started.</p>
+        <a href="/" class="btn">Go to Court Camper</a>
+      </div>
+
+      <!-- Error -->
+      <div class="error-state">
+        <div class="icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+        </div>
+        <h1>Something went wrong</h1>
+        <p>We couldn't confirm your account. The link may have expired — try signing up again or contact your team admin.</p>
+        <a href="/" class="btn">Go to Court Camper</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Court Camper. All rights reserved.
+  </footer>
+
+  <script>
+    // Supabase appends tokens in the URL hash after successful verification.
+    // If there's an error param, show the error state.
+    (function () {
+      var hash = window.location.hash.substring(1);
+      var params = new URLSearchParams(hash);
+      var query = new URLSearchParams(window.location.search);
+
+      if (query.get('error') || params.get('error')) {
+        document.body.classList.add('has-error');
+      }
+    })();
+  </script>
+
+</body>
+</html>
