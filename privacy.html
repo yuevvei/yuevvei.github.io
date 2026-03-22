@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Court Camper</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    p, ul {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    ul {
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #999;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://courtcamper.com" class="nav-brand">
+      <span>&#127936;</span> Court Camper
+    </a>
+  </nav>
+
+  <main>
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: March 22, 2026</p>
+
+    <p>Court Camper ("we", "our", "the app") is a basketball team management app. This policy explains what data we collect, how we use it, and your rights.</p>
+
+    <h2>What We Collect</h2>
+    <ul>
+      <li><strong>Account information</strong> — your name and email address, used to create and identify your account.</li>
+      <li><strong>Team data</strong> — team names, player rosters, events, game statistics, and financial records you create within the app.</li>
+      <li><strong>Messages</strong> — team chat messages, polls, and conversation content you send.</li>
+      <li><strong>Photos</strong> — images you upload to team albums, player profiles, or chat. Photos are stored securely and only accessible to team members.</li>
+      <li><strong>Device token</strong> — a push notification identifier used to deliver notifications to your device. This is not used for tracking.</li>
+    </ul>
+
+    <h2>How We Use Your Data</h2>
+    <p>Your data is used solely to provide app functionality:</p>
+    <ul>
+      <li>Authenticate your account and manage team membership</li>
+      <li>Display team information, events, stats, and media to team members</li>
+      <li>Deliver chat messages and push notifications</li>
+      <li>Show activity feeds and RSVP status</li>
+    </ul>
+
+    <h2>What We Don't Do</h2>
+    <ul>
+      <li>We do <strong>not</strong> sell your data to third parties.</li>
+      <li>We do <strong>not</strong> use your data for advertising or tracking.</li>
+      <li>We do <strong>not</strong> share your data outside your team.</li>
+      <li>We do <strong>not</strong> collect analytics or usage data.</li>
+    </ul>
+
+    <h2>Third-Party Services</h2>
+    <p>Court Camper uses the following services to operate:</p>
+    <ul>
+      <li><strong>Supabase</strong> — database, authentication, and file storage (hosted in the US).</li>
+      <li><strong>Firebase Cloud Messaging</strong> — push notification delivery only. No analytics or tracking is enabled.</li>
+      <li><strong>Resend</strong> — transactional email (password reset, email confirmation).</li>
+      <li><strong>Geoapify</strong> — static map images for event locations (no personal data is sent).</li>
+    </ul>
+
+    <h2>Data Storage and Security</h2>
+    <p>Your data is stored on Supabase's cloud infrastructure with row-level security policies ensuring users can only access data for teams they belong to. Photos are stored in private storage buckets accessible only via time-limited signed URLs.</p>
+
+    <h2>Data Retention</h2>
+    <p>Your data is retained as long as your account is active. Team data persists as long as the team exists. When you leave a team, your membership is removed but team content you contributed (messages, stats) remains for other members.</p>
+
+    <h2>Your Rights</h2>
+    <ul>
+      <li><strong>Access</strong> — you can view all your data within the app.</li>
+      <li><strong>Correction</strong> — you can edit your name, profile photo, and player information at any time.</li>
+      <li><strong>Deletion</strong> — you can leave teams and request account deletion by contacting us.</li>
+      <li><strong>Portability</strong> — game statistics and team data can be shared as images from within the app.</li>
+    </ul>
+
+    <h2>Children's Privacy</h2>
+    <p>Court Camper is designed for youth basketball teams. Player profiles for minors are managed by their parent or guardian through the guardian account system. Minors do not create their own accounts — guardians manage their data on their behalf.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this policy as the app evolves. Changes will be reflected by updating the "Last updated" date above.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions about this privacy policy or your data, contact us at <a href="mailto:privacy@courtcamper.com">privacy@courtcamper.com</a>.</p>
+  </main>
+
+  <footer>
+    &copy; 2026 Court Camper. All rights reserved.
+  </footer>
+</body>
+</html>
