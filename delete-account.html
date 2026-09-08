@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Your Account — Court Camper</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    p, ul {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    ul {
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #999;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 28px 0 8px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--primary);
+    }
+    .store-btn:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+    .store-btn.secondary {
+      background: #fff;
+      color: var(--primary-dark);
+    }
+    .store-btn.secondary:hover { background: var(--primary-light); }
+    .callout {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    ol li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://courtcamper.com" class="nav-brand">
+      <span>&#127936;</span> Court Camper
+    </a>
+  </nav>
+
+  <main>
+    <h1>Delete Your Account</h1>
+    <p class="last-updated">Last updated: September 7, 2026</p>
+
+    <p>You can permanently delete your Court Camper account and its associated data at any time. Deletion is immediate and cannot be undone.</p>
+
+    <div class="callout">
+      <p><strong>The fastest way is inside the app</strong> — no email, no waiting.</p>
+    </div>
+
+    <h2>Delete from the app</h2>
+    <ol>
+      <li>Open Court Camper and tap the menu icon in the top-left corner.</li>
+      <li>Under <strong>App Settings</strong>, tap <strong>Account Settings</strong>.</li>
+      <li>Scroll to the bottom and tap <strong>Delete Account</strong>.</li>
+      <li>Confirm the warning, then type <code>DELETE</code> to complete it.</li>
+    </ol>
+
+    <h2>Delete without the app</h2>
+    <p>If you no longer have the app installed, email <a href="mailto:privacy@courtcamper.com">privacy@courtcamper.com</a> from the address on your account with the subject "Delete my account". We will verify the request and action it within 30 days.</p>
+
+    <h2>What is deleted</h2>
+    <ul>
+      <li>Your account, login credentials, and email address.</li>
+      <li>Your name, profile photo, and player profile details.</li>
+      <li>Your team memberships and guardian links.</li>
+      <li>Photos, videos, albums, polls, invitations, and finance records you created.</li>
+      <li>Your push notification device tokens.</li>
+      <li>Any demo team belonging to you, in full.</li>
+    </ul>
+
+    <h2>What is kept, and why</h2>
+    <p>Some content stays so it does not break the record for the rest of your team:</p>
+    <ul>
+      <li><strong>Game statistics</strong> — play-by-play records and box scores remain part of the team's season history, with your account link removed.</li>
+      <li><strong>Chat messages</strong> — messages you sent remain visible to the team, but are no longer attributed to you.</li>
+      <li><strong>Team content created by others</strong> — teams, events, and rosters continue to belong to the team, not to you.</li>
+    </ul>
+
+    <h2>If you are the only coach on a team</h2>
+    <p>If you are the sole staff member on a team that still has other members, deletion is blocked so the team is not left without an administrator. Promote another member to staff first, then delete your account. If you are the head coach but not the only staff member, the head coach role transfers automatically to another staff member.</p>
+
+    <h2>Questions</h2>
+    <p>Contact us at <a href="mailto:privacy@courtcamper.com">privacy@courtcamper.com</a>. See also our <a href="/privacy.html">Privacy Policy</a>.</p>
+  </main>
+
+  <footer>
+    &copy; 2026 Court Camper. All rights reserved.
+  </footer>
+</body>
+</html>

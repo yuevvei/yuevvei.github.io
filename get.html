@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Court Camper</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    p, ul {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    ul {
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #999;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 28px 0 8px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--primary);
+    }
+    .store-btn:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+    .store-btn.secondary {
+      background: #fff;
+      color: var(--primary-dark);
+    }
+    .store-btn.secondary:hover { background: var(--primary-light); }
+    .callout {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    ol li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://courtcamper.com" class="nav-brand">
+      <span>&#127936;</span> Court Camper
+    </a>
+  </nav>
+
+  <main>
+    <h1>Get Court Camper</h1>
+    <p class="last-updated">Free for coaches, players, parents, and fans.</p>
+
+    <p>Install the app for your phone, then create an account and enter the invite code your coach sent you.</p>
+
+    <div class="store-buttons">
+      <a class="store-btn" href="https://apps.apple.com/us/app/court-camper/id6761033079">Download for iPhone</a>
+      <a class="store-btn secondary" href="https://play.google.com/store/apps/details?id=com.courtcamper.app">Get it on Android</a>
+    </div>
+
+    <h2>Joining a team</h2>
+    <ol>
+      <li>Install the app and create an account with your email address.</li>
+      <li>Tap <strong>Join a Team</strong> and enter the invite code you were given.</li>
+      <li>That is it — your team's schedule, roster, chat, and photos are waiting.</li>
+    </ol>
+
+    <p>Invite codes are issued by your team's coach or manager. If you do not have one, ask them to send you an invite.</p>
+
+    <h2>Questions</h2>
+    <p>Contact us at <a href="mailto:support@courtcamper.com">support@courtcamper.com</a>. See also our <a href="/privacy.html">Privacy Policy</a>.</p>
+  </main>
+
+  <footer>
+    &copy; 2026 Court Camper. All rights reserved.
+  </footer>
+</body>
+</html>
