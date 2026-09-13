@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar Subscription — Court Camper</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 24px 64px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .lead {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 36px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    ol, ul {
+      padding-left: 22px;
+      color: var(--text-secondary);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    li strong {
+      color: var(--text);
+    }
+
+    .note {
+      background: var(--primary-light);
+      border-left: 3px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin: 20px 0;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    .note strong {
+      color: var(--text);
+    }
+
+    .steps-intro {
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="index.html"><span>🏀</span> Court Camper</a>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Subscribe to your team calendar</h1>
+      <p class="lead">
+        Add your team's games, practices, and meetings to the calendar app you already use.
+        Events stay up to date automatically — you never have to re-add them.
+      </p>
+
+      <p class="steps-intro">
+        First, get your link: open Court Camper, go to your team's <strong>Info</strong> tab,
+        find <strong>Team Calendar</strong>, and tap <strong>Subscribe to Calendar</strong>.
+        Then follow the steps for your calendar app below.
+      </p>
+
+      <div class="note">
+        <strong>Keep your link private.</strong> Anyone who has it can see your team's schedule.
+        If you share it by accident, tap <strong>Reset link</strong> in the app — the old link
+        stops working immediately.
+      </div>
+
+      <h2>📱 iPhone or iPad</h2>
+      <ol>
+        <li>In Court Camper, tap <strong>Add to Calendar</strong>.</li>
+        <li>Your Calendar app opens and asks if you want to subscribe. Tap <strong>Subscribe</strong>.</li>
+        <li>Choose a colour and which account to add it to, then tap <strong>Add</strong>.</li>
+      </ol>
+      <p class="steps-intro">
+        To change how often it refreshes: <strong>Settings → Apps → Calendar → Accounts →
+        Subscribed Calendars</strong>, pick the calendar, and set <strong>Refresh</strong> to
+        every 15 minutes or hourly.
+      </p>
+
+      <h2>🖥️ Mac</h2>
+      <ol>
+        <li>Copy your link from Court Camper.</li>
+        <li>Open the Calendar app and choose <strong>File → New Calendar Subscription</strong>.</li>
+        <li>Paste the link, click <strong>Subscribe</strong>, then set <strong>Auto-refresh</strong> to
+          <strong>Every hour</strong>.</li>
+      </ol>
+
+      <h2>📅 Google Calendar</h2>
+      <div class="note">
+        <strong>This one has to be done on a computer.</strong> The Google Calendar mobile app
+        cannot add calendar subscriptions. Add it once on a desktop browser and it will then
+        show up in the mobile app automatically, signed in to the same Google account.
+      </div>
+      <ol>
+        <li>Copy your link from Court Camper (email or message it to yourself to get it onto your computer).</li>
+        <li>On a computer, open <strong>calendar.google.com</strong>.</li>
+        <li>In the left sidebar, next to <strong>Other calendars</strong>, click <strong>+</strong>
+          and choose <strong>From URL</strong>.</li>
+        <li>Paste the link and click <strong>Add calendar</strong>.</li>
+      </ol>
+
+      <h2>📧 Outlook</h2>
+      <ol>
+        <li>Copy your link from Court Camper.</li>
+        <li>Open <strong>outlook.com</strong> and go to <strong>Calendar</strong>.</li>
+        <li>Click <strong>Add calendar → Subscribe from web</strong>.</li>
+        <li>Paste the link, give the calendar a name, and click <strong>Import</strong>.</li>
+      </ol>
+
+      <h2>⏱️ Why don't changes show up right away?</h2>
+      <p class="steps-intro">
+        Subscribed calendars are not updated instantly. Your calendar app decides how often to
+        check for changes, and Court Camper cannot speed that up:
+      </p>
+      <ul>
+        <li><strong>Apple Calendar</strong> — as often as every 15 minutes, if you change the refresh setting.</li>
+        <li><strong>Google Calendar</strong> — usually every 8 to 24 hours. This cannot be changed.</li>
+        <li><strong>Outlook</strong> — usually every few hours.</li>
+      </ul>
+      <div class="note">
+        <strong>Always trust the app first.</strong> For last-minute schedule changes, Court Camper
+        and its push notifications are the source of truth. Your subscribed calendar is a
+        convenience, not a replacement.
+      </div>
+
+      <h2>🔁 Other things to know</h2>
+      <ul>
+        <li><strong>Cancelled events</strong> stay on your calendar with <strong>CANCELLED</strong> in
+          the title, so you can see that something was called off.</li>
+        <li><strong>You can't RSVP from your calendar app.</strong> The subscription is read-only —
+          open Court Camper to respond to events.</li>
+        <li><strong>One link per team.</strong> If you follow more than one team, subscribe to each
+          team's calendar separately from that team's Info tab.</li>
+        <li><strong>Leaving a team stops its calendar.</strong> The subscription stops updating once
+          you are no longer on the team; you can remove it from your calendar app.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    Need help? <a href="mailto:support@courtcamper.com">support@courtcamper.com</a>
+  </footer>
+</body>
+</html>
