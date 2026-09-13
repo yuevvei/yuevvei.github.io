@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Center — Court Camper</title>
+  <meta name="description" content="Answers to common questions about Court Camper: teams and roles, events and RSVPs, game stats, chat, media, notifications, and your account.">
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-dark: #E64A19;
+      --primary-light: #FFF3E0;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --bg: #ffffff;
+      --border: #eee;
+      --radius: 12px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-brand span {
+      font-size: 24px;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 24px 64px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .lead {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    a {
+      color: var(--primary-dark);
+    }
+
+    /* Search */
+    .search {
+      width: 100%;
+      font: inherit;
+      font-size: 16px;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      outline: none;
+      margin-bottom: 20px;
+    }
+
+    .search:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    /* Topic grid */
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .topic {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .topic:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .topic span {
+      font-size: 20px;
+    }
+
+    /* Sections and questions */
+    section {
+      scroll-margin-top: 72px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 40px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      background: var(--bg);
+    }
+
+    details[open] {
+      border-color: #ffd3c2;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 44px 14px 16px;
+      font-weight: 600;
+      font-size: 15px;
+      position: relative;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    details[open] summary::after {
+      content: '−';
+    }
+
+    .answer {
+      padding: 0 16px 16px;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    .answer p + p,
+    .answer p + ul,
+    .answer p + ol,
+    .answer ul + p,
+    .answer ol + p {
+      margin-top: 10px;
+    }
+
+    .answer ol, .answer ul {
+      padding-left: 22px;
+    }
+
+    .answer li {
+      margin-bottom: 6px;
+    }
+
+    .answer strong {
+      color: var(--text);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .note {
+      background: var(--primary-light);
+      border-left: 3px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin: 20px 0;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    .note strong {
+      color: var(--text);
+    }
+
+    .no-results {
+      display: none;
+      color: var(--text-secondary);
+      margin: 24px 0;
+    }
+
+    .contact {
+      margin-top: 48px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .topics {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .topic {
+        font-size: 14px;
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-brand" href="index.html"><span>🏀</span> Court Camper</a>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h1>Help Center</h1>
+      <p class="lead">
+        Answers to the questions coaches, players, parents, and fans ask most. Pick a topic, or
+        search for what you're trying to do.
+      </p>
+
+      <input class="search" id="search" type="search" placeholder="Search help — e.g. &quot;RSVP&quot;, &quot;invite&quot;, &quot;mute&quot;" aria-label="Search help">
+
+      <div class="topics" id="topics">
+        <a class="topic" href="#getting-started"><span>🚀</span> Getting Started</a>
+        <a class="topic" href="#team"><span>👥</span> Teams &amp; Roles</a>
+        <a class="topic" href="#events"><span>📅</span> Events &amp; RSVPs</a>
+        <a class="topic" href="#calendar"><span>🗓️</span> Calendar Subscription</a>
+        <a class="topic" href="#stats"><span>📊</span> Game Stats</a>
+        <a class="topic" href="#career"><span>🏅</span> Player Career Profile</a>
+        <a class="topic" href="#chat"><span>💬</span> Chat</a>
+        <a class="topic" href="#media"><span>📷</span> Media &amp; Albums</a>
+        <a class="topic" href="#home"><span>🔔</span> Home &amp; Notifications</a>
+        <a class="topic" href="#finance"><span>💰</span> Team Finances</a>
+        <a class="topic" href="#account"><span>⚙️</span> Account &amp; Settings</a>
+        <a class="topic" href="#troubleshooting"><span>🛠️</span> Troubleshooting</a>
+      </div>
+
+      <p class="no-results" id="no-results">
+        Nothing matched your search. Try a different word, or email
+        <a href="mailto:support@courtcamper.com">support@courtcamper.com</a> and we'll help.
+      </p>
+
+      <!-- ============================================================ -->
+      <section id="getting-started">
+        <h2>🚀 Getting Started</h2>
+
+        <details>
+          <summary>What is Court Camper?</summary>
+          <div class="answer">
+            <p>Court Camper is a team app for competitive youth basketball. Coaches, players, parents, and
+              fans share one place for the roster, schedule and RSVPs, live game stats, team chat, and
+              photos and videos.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I get the app?</summary>
+          <div class="answer">
+            <p>Court Camper is free on the <a href="https://apps.apple.com/us/app/court-camper/id6761033079">App Store</a>
+              for iPhone and iPad, and on <a href="https://play.google.com/store/apps/details?id=com.courtcamper.app">Google Play</a>
+              for Android. If someone sent you an invite, the link in it takes you to the right store for your phone.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I create an account?</summary>
+          <div class="answer">
+            <p>Open the app and tap <strong>Sign Up</strong>. Enter your first name (last name is optional),
+              email, and a password. We'll email you a confirmation link — tap it, then sign in.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What do the five tabs do?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Team</strong> — the roster, season stats, team finances, and team info.</li>
+              <li><strong>Events</strong> — the next 7 days and a monthly calendar of games, practices, and meetings.</li>
+              <li><strong>Home</strong> — your activity feed: things that need your response, what's new, and what's on today.</li>
+              <li><strong>Media</strong> — team photo albums and YouTube videos.</li>
+              <li><strong>Chat</strong> — team chat plus direct and group conversations.</li>
+            </ul>
+            <p>The menu icon at the top left of every tab opens the side menu, where you create or join teams
+              and find settings and help.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I create a team?</summary>
+          <div class="answer">
+            <p>Open the side menu and tap <strong>Create Team</strong>. Enter the team name and, if you like,
+              an abbreviation (shown in compact spots such as game titles), age group, gender, level, season,
+              and a team logo. You become the team's Head Coach.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I join a team?</summary>
+          <div class="answer">
+            <p>Open the side menu, tap <strong>Join Team</strong>, and enter the code you were given:</p>
+            <ul>
+              <li><strong>An invite code</strong> from the team's staff joins you as a coach, a player, or a
+                parent/guardian of a player — whichever the staff member set up.</li>
+              <li><strong>A fan code</strong> joins you as a fan, with view-only access.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can I try the app before joining a real team?</summary>
+          <div class="answer">
+            <p>Yes. If you aren't on any team yet, tap <strong>Try Demo Team</strong>. It creates a fully
+              populated sample team — roster, completed games with real stats, upcoming events, chat, and
+              photos — so you can explore everything. Delete it any time from Manage Teams or the Info tab.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can I be on more than one team?</summary>
+          <div class="answer">
+            <p>At the moment each account can create or join one team. The demo team doesn't count toward that limit.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="team">
+        <h2>👥 Teams &amp; Roles</h2>
+
+        <details>
+          <summary>What are the different roles?</summary>
+          <div class="answer">
+            <div class="table-wrap">
+              <table>
+                <tr><th></th><th>Staff</th><th>Player</th><th>Fan</th></tr>
+                <tr><td>Manage the team and roster</td><td>✅</td><td>—</td><td>—</td></tr>
+                <tr><td>Create and edit events</td><td>✅</td><td>—</td><td>—</td></tr>
+                <tr><td>RSVP to events</td><td>—</td><td>✅</td><td>—</td></tr>
+                <tr><td>See who's coming</td><td>✅</td><td>✅</td><td>✅</td></tr>
+                <tr><td>Team chat, polls, reactions</td><td>✅</td><td>✅</td><td>—</td></tr>
+                <tr><td>Pin messages</td><td>✅</td><td>—</td><td>—</td></tr>
+                <tr><td>Track game stats</td><td>✅</td><td>—</td><td>—</td></tr>
+                <tr><td>View stats</td><td>✅</td><td>✅</td><td>—</td></tr>
+                <tr><td>Add photos, videos, albums</td><td>✅</td><td>✅</td><td>—</td></tr>
+                <tr><td>Like photos and videos</td><td>✅</td><td>✅</td><td>✅</td></tr>
+              </table>
+            </div>
+            <p>Parents and guardians act on behalf of their player, so they can do what a player can.
+              Staff have a title — Head Coach, Assistant Coach, Team Manager, or Admin.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do guardians work?</summary>
+          <div class="answer">
+            <p>A guardian is a parent or caregiver linked to a player — ideal for younger players who don't
+              have their own account. Guardians RSVP for their player, chat, vote in polls, and edit their
+              player's profile. Each player can have up to two guardians.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I invite a player or a parent?</summary>
+          <div class="answer">
+            <ol>
+              <li>On the <strong>Roster</strong> tab, add the player first with the <strong>+</strong> button if they aren't listed.</li>
+              <li>Tap <strong>Send Invite</strong> on the player's card.</li>
+              <li>Choose <strong>Player</strong> if they'll use their own account, or <strong>Guardian</strong> for a parent.</li>
+              <li>Copy the invite and send it by text or email. When they join with the code, they're linked to that player.</li>
+            </ol>
+            <p>To invite a second guardian later, tap the small <strong>+</strong> next to the first guardian's name on the card.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I invite another coach or staff member?</summary>
+          <div class="answer">
+            <p>Go to <strong>Team → Info</strong> and tap the invite icon on the <strong>Staff List</strong> card.
+              Choose their title and share the code. Head Coaches and Admins can also promote someone who is
+              already on the team using the up-arrow icon on the same card.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do fans follow the team?</summary>
+          <div class="answer">
+            <p>Staff and players can share the team's <strong>Fan Invite Code</strong> from <strong>Team → Info</strong>.
+              Fans can see the roster, schedule, and who's coming, and can like photos and videos. They can't
+              chat, RSVP, or see stats.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I edit team details or add a team logo?</summary>
+          <div class="answer">
+            <p>Go to <strong>Team → Info</strong>. Head Coaches, Team Managers, and Admins can tap the pencil to
+              edit the name, abbreviation, age group, gender, level, season, and description, and tap the team
+              avatar to add or change the logo.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I edit a player's profile or photo?</summary>
+          <div class="answer">
+            <p>On the <strong>Roster</strong> tab, tap the small pencil at the top right of the player's card. You can
+              change the name, jersey number, positions, date of birth, and photo — photos are cropped to a circle.
+              Staff can edit any player; players can edit their own profile, and guardians their own player's.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I leave a team?</summary>
+          <div class="answer">
+            <p>Open the side menu and tap <strong>Manage Teams</strong>, then <strong>Leave Team</strong> on that team —
+              or use <strong>Leave Team</strong> at the bottom of the team's Info tab. You'll be asked to confirm first.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="events">
+        <h2>📅 Events &amp; RSVPs</h2>
+
+        <details>
+          <summary>How do I create an event?</summary>
+          <div class="answer">
+            <p>Staff tap the <strong>+</strong> button on the Events tab and choose Game, Practice, Meeting, or Other.
+              Add the date and time, location, arrival time, and notes. For games, enter the opponent and choose
+              league, tournament, or exhibition, home or away, and the game format — the title (for example
+              "LAK @ WAR") is created for you.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I RSVP?</summary>
+          <div class="answer">
+            <p>Tap <strong>Yes</strong>, <strong>Maybe</strong>, or <strong>No</strong> on the event card — on the Events
+              tab, on the Home feed, or on the event itself. Parents RSVP for their player. Events still waiting
+              for your answer appear at the top of Home under <strong>Needs Your Action</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I see who's coming?</summary>
+          <div class="answer">
+            <p>The ring beside the RSVP buttons shows how many have said yes. Tap it, or open the event, to see
+              everyone grouped by Yes, Maybe, No, and No Response.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do repeating events work?</summary>
+          <div class="answer">
+            <p>When creating an event, choose how often it repeats and until when. Each occurrence is its own event,
+              so players RSVP to each one. When you edit or delete one, you choose <strong>This Event Only</strong> or
+              <strong>All Future Events</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I cancel or restore an event?</summary>
+          <div class="answer">
+            <p>Open the event, tap the three-dot menu at the top right, and choose <strong>Cancel Event</strong>. The team
+              gets a notification and the event stays on the schedule marked <strong>CANCELLED</strong>. Choose
+              <strong>Restore Event</strong> from the same menu to bring it back.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can an event last several days, like a tournament?</summary>
+          <div class="answer">
+            <p>Yes. Set an end date after the start date. The event shows on every day it spans in the calendar and
+              stays in "Next 7 Days" until it's over.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I find events for just one team, or just games?</summary>
+          <div class="answer">
+            <p>Tap the team name at the top of the screen to pick a team, and use the Game / Practice / Meeting / Other
+              pills to filter by type. Your team choice is remembered and shared with Home, Media, and Chat.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="calendar">
+        <h2>🗓️ Calendar Subscription</h2>
+
+        <details>
+          <summary>Can I see team events in my phone's calendar?</summary>
+          <div class="answer">
+            <p>Yes. On the <strong>Events</strong> tab, tap the calendar icon at the top right (or find
+              <strong>Team Calendar</strong> on your team's Info tab), then tap <strong>Subscribe to Calendar</strong>
+              and <strong>Add to Calendar</strong>. Games, practices, and meetings then appear in Apple Calendar,
+              Google Calendar, or Outlook and stay up to date.</p>
+            <p>See <a href="calendar-help.html">Subscribe to your team calendar</a> for step-by-step instructions for
+              each calendar app.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Why don't changes show up in my calendar right away?</summary>
+          <div class="answer">
+            <p>Your calendar app decides how often to check for changes — Apple as often as every 15 minutes, Google
+              up to once a day. For last-minute changes, trust Court Camper and its notifications.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>I shared my calendar link by mistake. What do I do?</summary>
+          <div class="answer">
+            <p>Open the subscription in the app and tap <strong>Reset link</strong>. The old link stops working
+              immediately; subscribe again with the new one.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="stats">
+        <h2>📊 Game Stats</h2>
+
+        <details>
+          <summary>How do I track stats during a game?</summary>
+          <div class="answer">
+            <ol>
+              <li>Open the game on the Events tab and tap <strong>Track Stats</strong>.</li>
+              <li>On the <strong>Track</strong> tab, drag five players from the bench onto the court to set the starting lineup.</li>
+              <li>Tap a player on court and choose what happened — made or missed shot, rebound, steal, turnover, foul, and so on.</li>
+              <li>For shots, tap where on the court it was taken to build the shot chart.</li>
+            </ol>
+            <p>Only staff can track stats. Tap the help icon on the Track tab for the stat-keeping rules we follow.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do substitutions work?</summary>
+          <div class="answer">
+            <p>Drag a bench player onto a court player to swap them, and enter the game clock when asked. At the end
+              of each period everyone is subbed out automatically, so drag in a fresh lineup before the next one.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do assists and free throws get recorded?</summary>
+          <div class="answer">
+            <p>After a made basket you're asked <strong>Who Assisted?</strong> — pick the player or skip. When a player
+              draws a foul, the app walks you through who fouled, how many free throws, and each make or miss.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I end a period, go to overtime, or end the game?</summary>
+          <div class="answer">
+            <p>Tap <strong>END PERIOD</strong>. After the last period, a tied score offers overtime; otherwise confirm to
+              end the game. The team is notified that stats are ready. You can reopen a game later if you need to.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>I recorded something wrong. How do I fix it?</summary>
+          <div class="answer">
+            <p>Go to the <strong>Plays</strong> tab. Long-press a play to edit, delete, or move it, or to insert a missed
+              play above or below it. Stats, the box score, and minutes update right away.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Where do I see a game's results?</summary>
+          <div class="answer">
+            <p>The <strong>Summary</strong> tab has scores by period, a team-versus-opponent comparison, and shot charts.
+              The <strong>Box Score</strong> tab lists every player's stats — tap a column to sort, or long-press it to
+              see what the stat means. Players and staff can view games; staff can edit them.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Where are season stats and individual player stats?</summary>
+          <div class="answer">
+            <p>Go to <strong>Team → Stats</strong> for the season: team comparison, performance trends, shot charts, the
+              player leaderboard, and the game log. Once the team has played more than five games, use
+              <strong>Earlier</strong> and <strong>Recent</strong> to compare parts of the season. Tap a player to see their key stats, a radar chart against teammates, trends, and
+              their shot chart — and compare them with another player.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I share stats?</summary>
+          <div class="answer">
+            <p>Tap the share icon on a game's Summary or Box Score tab, on the season Stats tab, or on a player's page.
+              Court Camper creates a clean image you can send anywhere.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What do TS% and EFF mean?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>TS% (True Shooting)</strong> measures scoring efficiency counting twos, threes, and free throws:
+                points ÷ (2 × (field goal attempts + 0.44 × free throw attempts)).</li>
+              <li><strong>EFF (Efficiency)</strong> adds up the good (points, rebounds, assists, steals, blocks) and
+                subtracts the costly (missed shots, missed free throws, turnovers).</li>
+              <li><strong>+/-</strong> is the score difference while the player was on court.</li>
+            </ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="career">
+        <h2>🏅 Player Career Profile</h2>
+
+        <details>
+          <summary>What is a Player Career Profile?</summary>
+          <div class="answer">
+            <p>A player usually has a separate record for every team and season. A career profile links those records
+              as one player, so their stats can be seen across all of them instead of one season at a time.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Who can use it, and how do I link records?</summary>
+          <div class="answer">
+            <p>Players with their own account, and guardians for their players. Open the side menu and tap
+              <strong>Player Career Profile</strong>, tick two or more records that are the same player, and tap
+              <strong>Link Records as Same Player</strong>. Add another season later with <strong>Add another season</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Where do I see career stats?</summary>
+          <div class="answer">
+            <p>Tap the photo or name on a linked profile. Career Stats combines key stats, a radar chart, trends, a shot
+              chart, and a game log across every linked season — use the pills at the top to view the whole career or a
+              single season.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I unlink a record?</summary>
+          <div class="answer">
+            <p>Tap <strong>Unlink</strong> on that season. A profile needs at least two records, so unlinking down to one
+              removes the profile. The player records themselves are never deleted.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="chat">
+        <h2>💬 Chat</h2>
+
+        <details>
+          <summary>Who can use chat?</summary>
+          <div class="answer">
+            <p>Staff, players, and guardians. Fans don't have access to chat.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I start a direct or group conversation?</summary>
+          <div class="answer">
+            <p>On the Chat tab, tap <strong>+</strong>, pick the team, and choose people. One person starts a direct
+              message; two or more create a group you can name. Team chat is listed on top, your other conversations below.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do polls work?</summary>
+          <div class="answer">
+            <p>Tap the poll icon beside the message box, write a question, and add 2 to 6 options. New polls are pinned
+              automatically. Everyone gets one vote and can change it while the poll is open; votes aren't anonymous.
+              The poll closes when its creator closes it or when everyone has voted.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I reply, react, pin, save, or delete a message?</summary>
+          <div class="answer">
+            <p>Long-press the message:</p>
+            <ul>
+              <li><strong>Reply</strong> quotes it in your next message.</li>
+              <li><strong>Reactions</strong> 👍 ❤️ 😂 😮 😢 🔥 appear along the top.</li>
+              <li><strong>Save Message</strong> keeps a private copy — find saved messages from the bookmark icon on the Chat tab.</li>
+              <li><strong>Pin</strong> (staff) keeps it at hand for everyone under Pinned Messages.</li>
+              <li><strong>Delete</strong> — staff can delete any message, players their own.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I send a photo or @mention someone?</summary>
+          <div class="answer">
+            <p>Tap the photo icon to take or choose a picture. Type <strong>@</strong> to pick a teammate by name — they'll
+              see the message at the top of their Home feed.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I search a chat?</summary>
+          <div class="answer">
+            <p>Tap the search icon at the top of the chat and type a word or a person's name. Tap a result to jump to that message.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I mute a chat or leave a conversation?</summary>
+          <div class="answer">
+            <p>Open the chat and tap the three-dot menu. <strong>Mute</strong> stops notifications for that chat — it shows a
+              small dot instead of a count when there's new activity. In direct and group conversations the same menu has
+              <strong>Leave Chat</strong>, plus <strong>Members</strong> and <strong>Rename Group</strong> for groups.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="media">
+        <h2>📷 Media &amp; Albums</h2>
+
+        <details>
+          <summary>How do I create an album?</summary>
+          <div class="answer">
+            <p>On the Media tab, tap <strong>+</strong>. To keep a game's photos together, open the event and tap
+              <strong>Event Album</strong> — the album is linked to the event and named after it. Staff and players can
+              create albums.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I add photos or a YouTube video?</summary>
+          <div class="answer">
+            <p>Open the album and tap <strong>+</strong>. Take a photo, choose several from your gallery at once, or paste a
+              YouTube link — the thumbnail loads automatically and you can add a caption. Photos are resized before
+              uploading, and the team gets a notification.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do likes work, and where are my liked photos?</summary>
+          <div class="answer">
+            <p>Tap the heart on any photo or video — everyone, including fans, can like. Use the <strong>Liked</strong> filter at
+              the top of the Media tab to see everything you've liked.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Who can delete photos and albums?</summary>
+          <div class="answer">
+            <p>You can delete what you uploaded; staff can delete anything on the team. An album can only be deleted once it's
+              empty. Deleting an event never deletes its album — the album is simply unlinked.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="home">
+        <h2>🔔 Home &amp; Notifications</h2>
+
+        <details>
+          <summary>What's on the Home screen?</summary>
+          <div class="answer">
+            <ul>
+              <li><strong>Needs Your Action</strong> — events waiting for your RSVP, polls you haven't voted in, and messages that mention you.</li>
+              <li><strong>What's New</strong> — new photos and videos, new or cancelled events, finished game stats, and reactions to your messages. Tap one, or <strong>Dismiss all</strong>, to clear them.</li>
+              <li><strong>Coming Up Today</strong> — everything on today's schedule.</li>
+            </ul>
+            <p>The number on the Home tab counts the items that need you.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Which notifications can I turn off?</summary>
+          <div class="answer">
+            <p>Open the side menu and tap <strong>Notifications</strong> to switch these on or off: new events, event
+              cancellations, game stats, new photos, and new videos. Chat notifications are controlled per chat —
+              mute a chat to silence it.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="finance">
+        <h2>💰 Team Finances</h2>
+
+        <details>
+          <summary>How do I track team income and expenses?</summary>
+          <div class="answer">
+            <p>Go to <strong>Team → Finance</strong>. Staff tap <strong>+</strong> to add income such as dues or sponsorships, or
+              expenses such as tournament fees and equipment. Tap a transaction to edit or delete it. The balance card shows
+              income, expenses, and what's left.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Who can see the team's finances?</summary>
+          <div class="answer">
+            <p>Staff can add and edit. Players and guardians can view but not change anything. Fans can't see finances.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="account">
+        <h2>⚙️ Account &amp; Settings</h2>
+
+        <details>
+          <summary>How do I change my name or profile photo?</summary>
+          <div class="answer">
+            <p>Open the side menu and tap <strong>Account Settings</strong>. Edit your name, or tap the camera icon on your
+              avatar, then tap <strong>Save Changes</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I switch to dark mode?</summary>
+          <div class="answer">
+            <p>Open the side menu and use the <strong>Dark Mode</strong> row to choose light, dark, or auto (follows your phone).</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>I forgot my password.</summary>
+          <div class="answer">
+            <p>On the sign-in screen, tap <strong>Forgot Password?</strong> and enter your email. Open the link we send you
+              to choose a new password, then sign in with it.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I sign out?</summary>
+          <div class="answer">
+            <p>Open the side menu, tap <strong>Account Settings</strong>, and tap <strong>Sign Out</strong>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I delete my account?</summary>
+          <div class="answer">
+            <p>In <strong>Account Settings</strong>, tap <strong>Delete Account</strong> and confirm by typing DELETE. This is
+              permanent. If you're the only staff member on a team with other members, add another coach first. See
+              <a href="delete-account.html">Delete your account</a> for exactly what is removed and what is kept.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Which version of the app do I have?</summary>
+          <div class="answer">
+            <p>Open the side menu — the version number is shown at the top right, next to the Court Camper name.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I send feedback or report a problem?</summary>
+          <div class="answer">
+            <p>Open the side menu and tap <strong>Send Feedback</strong> — it goes straight to us. You can also email
+              <a href="mailto:support@courtcamper.com">support@courtcamper.com</a>. Mentioning your app version helps.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================ -->
+      <section id="troubleshooting">
+        <h2>🛠️ Troubleshooting</h2>
+
+        <details>
+          <summary>I'm not getting notifications.</summary>
+          <div class="answer">
+            <ol>
+              <li>Check that notifications for Court Camper are allowed in your phone's settings.</li>
+              <li>In the app, open the side menu → <strong>Notifications</strong> and make sure the types you want are on.</li>
+              <li>For chat, make sure the chat isn't muted (look for the crossed-out bell next to its name).</li>
+            </ol>
+          </div>
+        </details>
+
+        <details>
+          <summary>My invite code doesn't work.</summary>
+          <div class="answer">
+            <p>Check the code for typos. Codes can expire or be used up, so ask the team's staff for a new one if it still
+              fails. A guardian code won't work if the player already has two guardians, and you can't join if your account
+              is already on a team.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>I can't see Chat or Stats.</summary>
+          <div class="answer">
+            <p>Fans have view-only access and don't see chat or stats. If you should be a player, parent, or coach, ask the
+              team's staff to send you the right invite.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>The app says "Could not connect".</summary>
+          <div class="answer">
+            <p>Check your internet connection and tap <strong>Retry</strong>. While you're offline, most screens you've
+              opened before — the roster, stats, events, and media — still show what they last loaded, and refresh once
+              you're back online.</p>
+          </div>
+        </details>
+      </section>
+
+      <div class="note contact">
+        <strong>Still stuck?</strong> Email <a href="mailto:support@courtcamper.com">support@courtcamper.com</a> or use
+        <strong>Send Feedback</strong> in the app's side menu — we read every message.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Need help? <a href="mailto:support@courtcamper.com">support@courtcamper.com</a>
+    · <a href="privacy.html">Privacy Policy</a>
+  </footer>
+
+  <script>
+    // Filters questions as you type. Matching questions open so the answer is
+    // visible; topic headings with no matches are hidden.
+    (function () {
+      var input = document.getElementById('search');
+      var topics = document.getElementById('topics');
+      var noResults = document.getElementById('no-results');
+      var sections = Array.prototype.slice.call(document.querySelectorAll('main section'));
+
+      input.addEventListener('input', function () {
+        var query = input.value.trim().toLowerCase();
+        var anyMatch = false;
+
+        sections.forEach(function (section) {
+          var sectionMatch = false;
+          section.querySelectorAll('details').forEach(function (item) {
+            var match = !query || item.textContent.toLowerCase().indexOf(query) !== -1;
+            item.style.display = match ? '' : 'none';
+            item.open = !!query && match;
+            if (match) sectionMatch = true;
+          });
+          section.style.display = sectionMatch ? '' : 'none';
+          if (sectionMatch) anyMatch = true;
+        });
+
+        topics.style.display = query ? 'none' : '';
+        noResults.style.display = anyMatch ? 'none' : 'block';
+      });
+
+      // Opening a link like help.html#chat expands nothing by default; a link to
+      // a single question's id would open it here if one is ever added.
+      if (location.hash) {
+        var target = document.querySelector(location.hash);
+        if (target && target.tagName === 'DETAILS') target.open = true;
+      }
+    })();
+  </script>
+</body>
+</html>
