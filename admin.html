@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Dashboard — Court Camper</title>
+  <link rel="icon" type="image/png" href="../web/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: light;
+      --primary: #FF5722;
+      --primary-light: #FFF3E0;
+      --bg: #f9f9f7;
+      --surface: #fcfcfb;
+      --text: #0b0b0b;
+      --text-secondary: #52514e;
+      --muted: #898781;
+      --grid: #e1e0d9;
+      --axis: #c3c2b7;
+      --border: rgba(11, 11, 11, 0.10);
+      --hover: rgba(11, 11, 11, 0.04);
+      --good: #006300;
+      --bad: #d03b3b;
+      --s1: #2a78d6;
+      --s2: #eb6834;
+      --s3: #1baf7a;
+      --s4: #eda100;
+      --radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --primary-light: #3a2218;
+        --bg: #0d0d0d;
+        --surface: #1a1a19;
+        --text: #f0efec;
+        --text-secondary: #c3c2b7;
+        --muted: #898781;
+        --grid: #2c2c2a;
+        --axis: #383835;
+        --border: rgba(255, 255, 255, 0.10);
+        --hover: rgba(255, 255, 255, 0.05);
+        --good: #0ca30c;
+        --bad: #e66767;
+        --s1: #3987e5;
+        --s2: #d95926;
+        --s3: #199e70;
+        --s4: #c98500;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --primary-light: #3a2218;
+      --bg: #0d0d0d;
+      --surface: #1a1a19;
+      --text: #f0efec;
+      --text-secondary: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255, 255, 255, 0.10);
+      --hover: rgba(255, 255, 255, 0.05);
+      --good: #0ca30c;
+      --bad: #e66767;
+      --s1: #3987e5;
+      --s2: #d95926;
+      --s3: #199e70;
+      --s4: #c98500;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-brand span { font-size: 24px; }
+    .nav-brand small { font-weight: 500; font-size: 14px; color: var(--text-secondary); }
+
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      min-width: 0;
+    }
+
+    .nav-user .email {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: var(--hover); }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 16px;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    .btn-primary:hover { background: #E64A19; }
+
+    .panel {
+      max-width: 400px;
+      margin: 48px auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+
+    .panel h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    .panel p { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+    .panel label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+
+    .panel input {
+      width: 100%;
+      font: inherit;
+      font-size: 15px;
+      padding: 9px 12px;
+      border: 1px solid var(--axis);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .panel input:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+    .form-error { color: var(--bad); font-size: 13px; margin-top: 12px; min-height: 1em; }
+
+    .hidden { display: none !important; }
+
+    /* Filter row */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 16px;
+      margin-bottom: 20px;
+    }
+
+    .ranges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 3px;
+    }
+
+    .ranges button {
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      border-radius: 7px;
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .ranges button:hover { background: var(--hover); }
+
+    .ranges button[aria-pressed="true"] {
+      background: var(--primary-light);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .updated { font-size: 12px; color: var(--muted); }
+    .toolbar .spacer { flex: 1; }
+
+    #dash.loading .content { opacity: 0.5; transition: opacity 0.15s; }
+
+    /* Tiles */
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+
+    .tile .label { font-size: 13px; color: var(--text-secondary); }
+    .tile .value { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; margin: 2px 0; }
+    .tile .note { font-size: 12px; color: var(--muted); }
+    .delta-up { color: var(--good); }
+    .delta-down { color: var(--bad); }
+
+    /* Sections */
+    section { margin-bottom: 36px; }
+
+    section > h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .card.wide { grid-column: 1 / -1; }
+    .card h3 { font-size: 14px; font-weight: 600; }
+    .card .sub { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+    .card .total {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .card .total strong { color: var(--text); font-size: 15px; }
+
+    /* Charts */
+    .chart-host { position: relative; width: 100%; }
+    .chart-host svg { display: block; overflow: visible; }
+    .chart-host svg:focus { outline: none; }
+    .chart-host svg:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; border-radius: 4px; }
+    .tick { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .key { display: inline-block; width: 14px; height: 2px; border-radius: 1px; }
+
+    .tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .tooltip .title { color: var(--muted); margin-bottom: 4px; }
+    .tooltip .row { display: flex; align-items: center; gap: 8px; }
+    .tooltip strong { color: var(--text); font-size: 13px; min-width: 2ch; }
+
+    details.data { margin-top: 8px; font-size: 12px; }
+    details.data summary { color: var(--muted); cursor: pointer; }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 12px;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--grid);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 7px 8px;
+      border-bottom: 1px solid var(--grid);
+      white-space: nowrap;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td .secondary { color: var(--muted); font-size: 12px; }
+    details.data table { margin-top: 6px; }
+
+    /* Bar lists */
+    .bars { display: grid; gap: 10px; }
+    .bar-row { display: grid; grid-template-columns: minmax(110px, 38%) 1fr; gap: 10px; align-items: center; font-size: 13px; }
+    .bar-row .name { color: var(--text-secondary); }
+    .bar-track { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .bar { height: 12px; border-radius: 0 4px 4px 0; background: var(--s1); min-width: 2px; }
+    .bar-value { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .bar-value .secondary { color: var(--muted); font-size: 12px; }
+
+    .empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
+
+    .notes {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .notes li { margin: 0 0 4px 18px; }
+
+    @media (max-width: 520px) {
+      .nav-brand small { display: none; }
+      .tile .value { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-brand"><span>🏀</span> Court Camper <small>Admin</small></a>
+    <div class="nav-user hidden" id="nav-user">
+      <span class="email" id="user-email"></span>
+      <button class="btn" id="sign-out">Sign out</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="panel hidden" id="sign-in">
+      <h1>Admin sign in</h1>
+      <p>Use your Court Camper account. Only super users can see the dashboard.</p>
+      <form id="sign-in-form">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button class="btn btn-primary" type="submit" id="sign-in-button">Sign in</button>
+        <div class="form-error" id="sign-in-error" role="alert"></div>
+      </form>
+    </div>
+
+    <div class="panel hidden" id="denied">
+      <h1>No access</h1>
+      <p id="denied-text">This account is not a super user.</p>
+      <button class="btn" id="denied-sign-out">Sign in with another account</button>
+    </div>
+
+    <div class="hidden" id="dash">
+      <div class="toolbar">
+        <div class="ranges" id="ranges" role="group" aria-label="Date range"></div>
+        <span class="spacer"></span>
+        <span class="updated" id="updated"></span>
+        <button class="btn" id="refresh">Refresh</button>
+      </div>
+
+      <div class="content" id="content"></div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script>
+    // All numbers come from the admin_dashboard() RPC
+    // (supabase/migrations/20261021_admin_dashboard.sql), which refuses anyone
+    // who is not a super user. This page holds only the public anon key.
+    var SUPABASE_URL = 'https://ttfwxjpspkothpfifjrz.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0Znd4anBzcGtvdGhwZmlmanJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5MjAzMzYsImV4cCI6MjA4MTQ5NjMzNn0.4Z396SEQ1p4ZZRK2XvuPHRaidQO7X1CwXmpacJKJw0Y';
+    var client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    var RANGES = [
+      { id: '7d', label: '7 days', days: 7, bucket: 'day' },
+      { id: '30d', label: '30 days', days: 30, bucket: 'day' },
+      { id: '90d', label: '90 days', days: 90, bucket: 'week' },
+      { id: '1y', label: '12 months', days: 365, bucket: 'week' },
+      { id: 'all', label: 'All time', days: null, bucket: 'month' }
+    ];
+
+    var state = { range: '30d', data: null, loading: false };
+    try {
+      var saved = localStorage.getItem('admin_range');
+      if (RANGES.some(function (r) { return r.id === saved; })) state.range = saved;
+    } catch (e) {}
+
+    // ---------- DOM helpers ----------
+
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+
+    function el(tag, attrs) {
+      var node = document.createElement(tag);
+      attrs = attrs || {};
+      Object.keys(attrs).forEach(function (k) {
+        if (k === 'class') node.className = attrs[k];
+        else if (k === 'text') node.textContent = attrs[k];
+        else node.setAttribute(k, attrs[k]);
+      });
+      for (var i = 2; i < arguments.length; i++) {
+        var kid = arguments[i];
+        if (kid == null) continue;
+        node.append(kid);
+      }
+      return node;
+    }
+
+    function svg(tag, attrs) {
+      var node = document.createElementNS(SVG_NS, tag);
+      Object.keys(attrs || {}).forEach(function (k) { node.setAttribute(k, attrs[k]); });
+      return node;
+    }
+
+    function cssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function show(id) {
+      ['sign-in', 'denied', 'dash'].forEach(function (p) {
+        document.getElementById(p).classList.toggle('hidden', p !== id);
+      });
+    }
+
+    // ---------- Formatting ----------
+
+    function fmt(n) {
+      if (n == null) return '—';
+      if (Math.abs(n) >= 10000) {
+        return new Intl.NumberFormat(undefined, { notation: 'compact', maximumFractionDigits: 1 }).format(n);
+      }
+      return n.toLocaleString();
+    }
+
+    function sum(values) {
+      return values.reduce(function (a, b) { return a + b; }, 0);
+    }
+
+    function parseBucket(s) {
+      var p = s.split('-');
+      return new Date(+p[0], +p[1] - 1, +p[2]);
+    }
+
+    function bucketLabel(s, bucket, long) {
+      var d = parseBucket(s);
+      if (bucket === 'month') {
+        return d.toLocaleDateString(undefined, long ? { month: 'long', year: 'numeric' } : { month: 'short', year: '2-digit' });
+      }
+      var text = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      return long && bucket === 'week' ? 'Week of ' + text : text;
+    }
+
+    function periodName() {
+      var r = currentRange();
+      return r.days ? 'previous ' + r.label : null;
+    }
+
+    // A signed change line for tiles and tables: "▲ 25% vs previous 30 days".
+    function deltaNode(current, previous, withPeriod) {
+      if (previous == null) return null;
+      var suffix = withPeriod && periodName() ? ' vs ' + periodName() : '';
+      if (current === previous) return el('span', { text: 'No change' + suffix });
+      var up = current > previous;
+      var text;
+      if (previous === 0) text = (up ? '▲ up from 0' : '');
+      else text = (up ? '▲ ' : '▼ ') + Math.round(Math.abs(current - previous) / previous * 100) + '%';
+      return el('span', { class: up ? 'delta-up' : 'delta-down', text: text + suffix });
+    }
+
+    function niceStep(max) {
+      if (max <= 4) return 1;
+      var raw = max / 4;
+      var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+      var norm = raw / mag;
+      var step = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10;
+      return Math.max(1, step * mag);
+    }
+
+    // ---------- Line chart ----------
+    // cfg: { title, buckets, bucket, series: [{ name, values, color }] }
+
+    function lineChart(cfg) {
+      var wrap = el('div');
+      if (cfg.series.length > 1) {
+        var legend = el('div', { class: 'legend' });
+        cfg.series.forEach(function (s) {
+          legend.append(el('span', {}, el('i', { class: 'key', style: 'background:' + s.color }), s.name));
+        });
+        wrap.append(legend);
+      }
+      var host = el('div', { class: 'chart-host' });
+      wrap.append(host);
+      wrap.append(dataTable(cfg));
+      chartQueue.push({ host: host, cfg: cfg });
+      return wrap;
+    }
+
+    function drawLineChart(host, cfg) {
+      host.replaceChildren();
+      var W = Math.max(260, host.clientWidth), H = 190;
+      var m = { t: 10, r: 10, b: 24, l: 36 };
+      var iw = W - m.l - m.r, ih = H - m.t - m.b;
+      var n = cfg.buckets.length;
+      var max = Math.max.apply(null, [0].concat(cfg.series.map(function (s) { return Math.max.apply(null, s.values); })));
+      var step = niceStep(max);
+      var yMax = Math.max(step, Math.ceil(max / step) * step);
+      function x(i) { return m.l + (n <= 1 ? iw / 2 : i * iw / (n - 1)); }
+      function y(v) { return m.t + ih - v / yMax * ih; }
+
+      var root = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', tabindex: 0, 'aria-label': cfg.title });
+
+      for (var v = 0; v <= yMax + 1e-9; v += step) {
+        root.append(svg('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: v === 0 ? cssVar('--axis') : cssVar('--grid'), 'stroke-width': 1 }));
+        var t = svg('text', { x: m.l - 8, y: y(v) + 4, 'text-anchor': 'end', class: 'tick' });
+        t.textContent = fmt(v);
+        root.append(t);
+      }
+
+      var labelCount = Math.min(n, W < 420 ? 3 : 5);
+      var shown = {};
+      for (var j = 0; j < labelCount; j++) {
+        var idx = labelCount === 1 ? 0 : Math.round(j * (n - 1) / (labelCount - 1));
+        if (shown[idx]) continue;
+        shown[idx] = true;
+        var anchor = n === 1 ? 'middle' : idx === 0 ? 'start' : idx === n - 1 ? 'end' : 'middle';
+        var lt = svg('text', { x: x(idx), y: H - 6, 'text-anchor': anchor, class: 'tick' });
+        lt.textContent = bucketLabel(cfg.buckets[idx], cfg.bucket, false);
+        root.append(lt);
+      }
+
+      // The range always ends now, so the last bucket is still filling up: its
+      // segment is dashed rather than reading as a sudden drop.
+      cfg.series.forEach(function (s) {
+        function pathTo(last) {
+          return s.values.slice(0, last + 1).map(function (val, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ',' + y(val).toFixed(1); }).join('');
+        }
+        var d = pathTo(n - 1);
+        if (cfg.series.length === 1 && n > 1) {
+          root.append(svg('path', { d: d + 'L' + x(n - 1) + ',' + y(0) + 'L' + x(0) + ',' + y(0) + 'Z', fill: s.color, 'fill-opacity': 0.1 }));
+        }
+        var line = { fill: 'none', stroke: s.color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' };
+        if (n > 1) {
+          root.append(svg('path', Object.assign({ d: pathTo(n - 2) }, line)));
+          root.append(svg('path', Object.assign({
+            d: 'M' + x(n - 2).toFixed(1) + ',' + y(s.values[n - 2]).toFixed(1) + 'L' + x(n - 1).toFixed(1) + ',' + y(s.values[n - 1]).toFixed(1),
+            'stroke-dasharray': '2 4'
+          }, line)));
+        }
+        if (n === 1) root.append(svg('circle', { cx: x(0), cy: y(s.values[0]), r: 4, fill: s.color }));
+      });
+
+      // Hover layer: crosshair snaps to the nearest bucket and lists every series.
+      var cross = svg('line', { y1: m.t, y2: m.t + ih, stroke: cssVar('--axis'), 'stroke-width': 1, visibility: 'hidden' });
+      root.append(cross);
+      var dots = cfg.series.map(function (s) {
+        var c = svg('circle', { r: 4, fill: s.color, stroke: cssVar('--surface'), 'stroke-width': 2, visibility: 'hidden' });
+        root.append(c);
+        return c;
+      });
+      var overlay = svg('rect', { x: m.l - 6, y: 0, width: iw + 12, height: H, fill: 'transparent' });
+      root.append(overlay);
+      host.append(root);
+
+      var tip = el('div', { class: 'tooltip hidden' });
+      host.append(tip);
+      var current = -1;
+
+      function showAt(i) {
+        current = i;
+        cross.setAttribute('x1', x(i));
+        cross.setAttribute('x2', x(i));
+        cross.setAttribute('visibility', 'visible');
+        dots.forEach(function (c, k) {
+          c.setAttribute('cx', x(i));
+          c.setAttribute('cy', y(cfg.series[k].values[i]));
+          c.setAttribute('visibility', 'visible');
+        });
+        tip.replaceChildren(el('div', { class: 'title', text: bucketLabel(cfg.buckets[i], cfg.bucket, true) + (i === n - 1 ? ' (so far)' : '') }));
+        cfg.series.forEach(function (s) {
+          tip.append(el('div', { class: 'row' },
+            el('i', { class: 'key', style: 'background:' + s.color }),
+            el('strong', { text: fmt(s.values[i]) }),
+            s.name));
+        });
+        tip.classList.remove('hidden');
+        var left = x(i) + 12;
+        if (left + tip.offsetWidth > W) left = x(i) - 12 - tip.offsetWidth;
+        tip.style.left = Math.max(0, left) + 'px';
+        tip.style.top = m.t + 'px';
+      }
+
+      function hide() {
+        current = -1;
+        cross.setAttribute('visibility', 'hidden');
+        dots.forEach(function (c) { c.setAttribute('visibility', 'hidden'); });
+        tip.classList.add('hidden');
+      }
+
+      overlay.addEventListener('pointermove', function (e) {
+        var rect = root.getBoundingClientRect();
+        var px = (e.clientX - rect.left) * (W / rect.width);
+        var i = n <= 1 ? 0 : Math.round((px - m.l) / iw * (n - 1));
+        showAt(Math.max(0, Math.min(n - 1, i)));
+      });
+      overlay.addEventListener('pointerleave', hide);
+      root.addEventListener('focus', function () { showAt(n - 1); });
+      root.addEventListener('blur', hide);
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { showAt(Math.max(0, (current < 0 ? n : current) - 1)); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { showAt(Math.min(n - 1, current + 1)); e.preventDefault(); }
+      });
+    }
+
+    function dataTable(cfg) {
+      var details = el('details', { class: 'data' }, el('summary', { text: 'Data table' }));
+      details.addEventListener('toggle', function () {
+        if (!details.open || details.querySelector('table')) return;
+        var head = el('tr', {}, el('th', { text: cfg.bucket === 'week' ? 'Week of' : cfg.bucket === 'month' ? 'Month' : 'Day' }));
+        cfg.series.forEach(function (s) { head.append(el('th', { class: 'num', text: s.name })); });
+        var body = el('tbody');
+        cfg.buckets.forEach(function (b, i) {
+          var row = el('tr', {}, el('td', { text: bucketLabel(b, cfg.bucket, false) }));
+          cfg.series.forEach(function (s) { row.append(el('td', { class: 'num', text: fmt(s.values[i]) })); });
+          body.prepend(row);
+        });
+        details.append(el('div', { class: 'table-wrap' }, el('table', {}, el('thead', {}, head), body)));
+      });
+      return details;
+    }
+
+    function sparkline(values) {
+      var W = 96, H = 24;
+      var max = Math.max.apply(null, [1].concat(values));
+      var n = values.length;
+      var pts = values.map(function (v, i) {
+        return (n <= 1 ? W / 2 : i * (W - 4) / (n - 1) + 2).toFixed(1) + ',' + (H - 2 - v / max * (H - 4)).toFixed(1);
+      }).join(' ');
+      var root = svg('svg', { width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, 'aria-hidden': 'true' });
+      root.append(svg('polyline', { points: pts, fill: 'none', stroke: cssVar('--s1'), 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
+      return root;
+    }
+
+    // rows: [{ name, value, max, detail }]
+    function barList(rows) {
+      var list = el('div', { class: 'bars' });
+      rows.forEach(function (r) {
+        var pct = r.max > 0 ? r.value / r.max * 100 : 0;
+        list.append(el('div', { class: 'bar-row' },
+          el('span', { class: 'name', text: r.name }),
+          el('div', { class: 'bar-track' },
+            el('div', { class: 'bar', style: 'width:calc(' + pct.toFixed(1) + '% - 60px)' }),
+            el('span', { class: 'bar-value' }, fmt(r.value), r.detail ? el('span', { class: 'secondary', text: ' ' + r.detail }) : null))));
+      });
+      return list;
+    }
+
+    // ---------- Layout ----------
+
+    var chartQueue = [];
+
+    function currentRange() {
+      return RANGES.filter(function (r) { return r.id === state.range; })[0];
+    }
+
+    function tile(label, value, noteNode) {
+      return el('div', { class: 'tile' },
+        el('div', { class: 'label', text: label }),
+        el('div', { class: 'value', text: fmt(value) }),
+        el('div', { class: 'note' }, noteNode));
+    }
+
+    function card(title, sub, body, opts) {
+      opts = opts || {};
+      return el('div', { class: 'card' + (opts.wide ? ' wide' : '') },
+        el('h3', { text: title }),
+        sub ? el('div', { class: 'sub', text: sub }) : null,
+        opts.total || null,
+        body);
+    }
+
+    function totalLine(parts) {
+      var line = el('div', { class: 'total' });
+      parts.forEach(function (p, i) {
+        if (i) line.append(' · ');
+        line.append(el('strong', { text: fmt(p.value) }), ' ' + p.label + ' ');
+        if (p.delta) line.append(p.delta);
+      });
+      return line;
+    }
+
+    function section(title) {
+      var s = el('section', {}, el('h2', { text: title }));
+      var grid = el('div', { class: 'grid' });
+      s.append(grid);
+      return { node: s, grid: grid };
+    }
+
+    function render() {
+      var d = state.data;
+      if (!d) return;
+      var content = document.getElementById('content');
+      chartQueue = [];
+      content.replaceChildren();
+
+      var S = d.summary, series = d.series, B = d.buckets, bucket = d.range.bucket;
+      var C = [cssVar('--s1'), cssVar('--s2'), cssVar('--s3'), cssVar('--s4')];
+      var hasPrev = d.range.previous_from != null;
+
+      function metricChart(title, sub, metrics, opts) {
+        var cfg = {
+          title: title, buckets: B, bucket: bucket,
+          series: metrics.map(function (m, i) { return { name: m[1], values: m[2] || series[m[0]], color: C[i] }; })
+        };
+        var parts = metrics.map(function (m) {
+          var cur = m[2] ? sum(m[2]) : S[m[0]].current;
+          var prev = m[3] !== undefined ? m[3] : (S[m[0]] ? S[m[0]].previous : null);
+          return { value: cur, label: m[1].toLowerCase(), delta: deltaNode(cur, prev, false) };
+        });
+        return card(title, sub, lineChart(cfg), Object.assign({ total: totalLine(parts) }, opts));
+      }
+
+      // Tiles
+      var subs = d.subscriptions;
+      var tiles = el('div', { class: 'tiles' },
+        tile('Total users', d.totals.users,
+          el('span', {}, '+' + fmt(S.new_user.current) + ' this period ', deltaNode(S.new_user.current, S.new_user.previous, false))),
+        tile('Total teams', d.totals.teams,
+          el('span', {}, '+' + fmt(S.new_team.current) + ' this period ', deltaNode(S.new_team.current, S.new_team.previous, false))),
+        tile('Active users', d.active.users, deltaNode(d.active.users, d.active.users_previous, true) || el('span', { text: 'Did something in the app' })),
+        tile('Active teams', d.active.teams, deltaNode(d.active.teams, d.active.teams_previous, true) || el('span', { text: 'Any activity on the team' })),
+        tile('Opened the app, 7 days', d.opened_app.last_7_days, el('span', { text: fmt(d.opened_app.last_30_days) + ' in the last 30 days' })),
+        tile('Family Plus subscribers', subs.family_plus_subscription,
+          el('span', { text: fmt(subs.family_plus_promo_pass + subs.family_plus_manual) + ' more on free passes' })),
+        tile('Team Pro teams', subs.team_pro_store,
+          el('span', { text: fmt(subs.team_pro_manual) + ' more granted by hand' })));
+      content.append(tiles);
+
+      // Growth
+      var growth = section('Growth');
+      growth.grid.append(
+        metricChart('New users and teams', 'Accounts created and non-demo teams created',
+          [['new_user', 'New users'], ['new_team', 'New teams']]),
+        metricChart('New team members by role', 'Rows added to rosters; players include ones a coach added without an account',
+          [['member_staff', 'Staff'], ['member_player', 'Players'], ['member_guardian', 'Guardians'], ['member_fan', 'Fans']]),
+        metricChart('Invites', 'Player, guardian and staff invite codes; fan codes are not tracked',
+          [['invite_created', 'Created'], ['invite_redeemed', 'Redeemed']]));
+      content.append(growth.node);
+
+      // Engagement
+      var engagement = section('Engagement');
+      engagement.grid.append(
+        metricChart('Active users', 'Distinct people who did anything per ' + bucket,
+          [['active_users', 'Active users', d.active_series.users, null]],
+          { total: totalLine([{ value: d.active.users, label: 'distinct this period', delta: deltaNode(d.active.users, d.active.users_previous, false) }]) }),
+        metricChart('Active teams', 'Distinct teams with any activity per ' + bucket,
+          [['active_teams', 'Active teams', d.active_series.teams, null]],
+          { total: totalLine([{ value: d.active.teams, label: 'distinct this period', delta: deltaNode(d.active.teams, d.active.teams_previous, false) }]) }),
+        metricChart('Events scheduled', 'By type; a repeating series counts once',
+          [['event_game', 'Games'], ['event_practice', 'Practices'], ['event_meeting', 'Meetings'], ['event_other', 'Other']]),
+        metricChart('RSVPs', 'One per player per event, dated by its latest answer or change', [['rsvp', 'RSVPs']]),
+        metricChart('Messages', 'Team chat and direct / group conversations',
+          [['message_team', 'Team chat'], ['message_direct', 'Conversations']]));
+      content.append(engagement.node);
+
+      // Stats
+      var stats = section('Game stats');
+      stats.grid.append(
+        metricChart('Games tracked', 'Games whose first play was logged in the period', [['game_tracked', 'Games']]),
+        metricChart('Stat actions logged', 'Plays recorded on the Track tab', [['stat_action', 'Actions']]));
+      content.append(stats.node);
+
+      // Revenue
+      var revenue = section('Revenue');
+      var subTable = el('table', {},
+        el('thead', {}, el('tr', {}, el('th', { text: 'Active now' }), el('th', { class: 'num', text: 'Count' }))),
+        el('tbody', {},
+          subRow('Family Plus — store subscription', subs.family_plus_subscription, 'users'),
+          subRow('Family Plus — promo year pass', subs.family_plus_promo_pass, 'users'),
+          subRow('Family Plus — manual grant', subs.family_plus_manual, 'users'),
+          subRow('Team Pro — store pass', subs.team_pro_store, 'teams'),
+          subRow('Team Pro — manual grant', subs.team_pro_manual, 'teams')));
+      revenue.grid.append(
+        card('Subscriptions', 'Live today, whatever range is selected. Super users get both tiers without a row and are not counted.',
+          el('div', { class: 'table-wrap' }, subTable)),
+        metricChart('Passes added', 'Team Pro passes (bought or redeemed — the store does not distinguish) and Family Plus promo passes',
+          [['pass_team_pro', 'Team Pro'], ['pass_family_plus', 'Family Plus promo']]));
+      content.append(revenue.node);
+
+      // Feature adoption
+      var features = section('Feature adoption');
+      var rows = [
+        ['album', 'Albums created'], ['photo', 'Photos uploaded'], ['video', 'Videos added'], ['like', 'Media likes'],
+        ['poll', 'Polls created'], ['poll_vote', 'Poll votes'], ['reaction', 'Message reactions'],
+        ['lineup_plan', 'Lineup plans saved'], ['recap_team', 'AI team recaps'], ['recap_player', 'AI player recaps'],
+        ['season_review', 'AI season reviews'], ['calendar_feed', 'Calendar subscriptions']
+      ];
+      var head = el('tr', {}, el('th', { text: 'Feature' }), el('th', { class: 'num', text: 'This period' }));
+      if (hasPrev) head.append(el('th', { class: 'num', text: 'Previous' }), el('th', { class: 'num', text: 'Change' }));
+      head.append(el('th', { text: 'Trend' }));
+      var body = el('tbody');
+      rows.forEach(function (r) {
+        var s = S[r[0]];
+        var tr = el('tr', {}, el('td', { text: r[1] }), el('td', { class: 'num', text: fmt(s.current) }));
+        if (hasPrev) tr.append(el('td', { class: 'num', text: fmt(s.previous) }), el('td', { class: 'num' }, deltaNode(s.current, s.previous, false)));
+        tr.append(el('td', {}, sparkline(series[r[0]])));
+        body.append(tr);
+      });
+      features.grid.append(card('Feature use', 'Season reviews count the latest generation per player per season; regenerating overwrites the date.',
+        el('div', { class: 'table-wrap' }, el('table', {}, el('thead', {}, head), body)), { wide: true }));
+      content.append(features.node);
+
+      // Activation & platforms
+      var activation = section('Activation and platforms');
+      var a = d.activation;
+      var actBody = a.judged
+        ? barList([
+            { name: '5+ players on roster', value: a.players_5, max: a.judged, detail: pct(a.players_5, a.judged) },
+            { name: 'Scheduled an event', value: a.event_1, max: a.judged, detail: pct(a.event_1, a.judged) },
+            { name: 'Non-staff member joined', value: a.joined, max: a.judged, detail: pct(a.joined, a.judged) },
+            { name: 'All three', value: a.activated, max: a.judged, detail: pct(a.activated, a.judged) }
+          ])
+        : el('div', { class: 'empty', text: 'No team created in this range is 14 days old yet.' });
+      activation.grid.append(card('New team activation',
+        'Within 14 days of creation. ' + fmt(a.judged) + ' of ' + fmt(a.teams) + ' teams created in this range are old enough to judge.',
+        actBody));
+
+      var platforms = Object.keys(d.platforms).sort();
+      var platMax = Math.max.apply(null, [0].concat(platforms.map(function (p) { return d.platforms[p].users; })));
+      var platNames = { ios: 'iOS', android: 'Android', web: 'Web' };
+      activation.grid.append(card('Platforms', 'People with a push token per platform, as of today (someone with two devices counts on both)',
+        platforms.length
+          ? barList(platforms.map(function (p) {
+              return { name: platNames[p] || p, value: d.platforms[p].users, max: platMax, detail: fmt(d.platforms[p].users_30_days) + ' opened in 30 days' };
+            }))
+          : el('div', { class: 'empty', text: 'No device tokens yet.' })));
+      content.append(activation.node);
+
+      // Top teams
+      var top = section('Most active teams');
+      var tHead = el('tr', {},
+        el('th', { text: 'Team' }), el('th', { class: 'num', text: 'Active people' }), el('th', { class: 'num', text: 'Roster' }),
+        el('th', { class: 'num', text: 'Messages' }), el('th', { class: 'num', text: 'RSVPs' }), el('th', { class: 'num', text: 'Events' }),
+        el('th', { class: 'num', text: 'Games tracked' }), el('th', { class: 'num', text: 'Media' }), el('th', { class: 'num', text: 'All actions' }));
+      var tBody = el('tbody');
+      d.top_teams.forEach(function (t) {
+        tBody.append(el('tr', {},
+          el('td', {}, t.name || 'Unnamed team', t.abbreviation ? el('span', { class: 'secondary', text: ' ' + t.abbreviation }) : null),
+          el('td', { class: 'num', text: fmt(t.people) }), el('td', { class: 'num', text: fmt(t.roster) }),
+          el('td', { class: 'num', text: fmt(t.messages) }), el('td', { class: 'num', text: fmt(t.rsvps) }),
+          el('td', { class: 'num', text: fmt(t.events) }), el('td', { class: 'num', text: fmt(t.games_tracked) }),
+          el('td', { class: 'num', text: fmt(t.media) }), el('td', { class: 'num', text: fmt(t.actions) })));
+      });
+      top.grid.append(card('Top 10 teams', 'Ranked by distinct people active in the period, then by total actions',
+        d.top_teams.length
+          ? el('div', { class: 'table-wrap' }, el('table', {}, el('thead', {}, tHead), tBody))
+          : el('div', { class: 'empty', text: 'No team activity in this range.' }),
+        { wide: true }));
+      content.append(top.node);
+
+      // Definitions
+      var notes = section('How these are counted');
+      notes.grid.append(card('Definitions', null, el('ul', { class: 'notes' },
+        el('li', { text: 'Demo teams and everything on them are excluded everywhere.' }),
+        el('li', { text: 'Active means wrote something: a message, RSVP, vote, reaction, stat, upload, event, invite, plan, or joining a team. Opening the app and reading are not visible, except through “Opened the app”, which is each device’s last signed-in launch and has no history.' }),
+        el('li', { text: 'RSVPs for players without their own account count towards the team being active, not towards any person.' }),
+        el('li', { text: 'Family Plus subscriptions are re-written on every store sync, so they only appear as a live count; purchase history is in RevenueCat.' }),
+        el('li', { text: 'Totals count accounts and teams that still exist; deleted ones drop out of past numbers too.' }),
+        el('li', { text: 'Period changes compare against the same length of time immediately before. Days, weeks and months follow this browser’s time zone (' + d.range.tz + ').' })
+      ), { wide: true }));
+      content.append(notes.node);
+
+      drawCharts();
+      document.getElementById('updated').textContent = 'Updated ' + new Date(d.range.generated_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    }
+
+    function subRow(label, value, unit) {
+      return el('tr', {}, el('td', { text: label }), el('td', { class: 'num' }, fmt(value), el('span', { class: 'secondary', text: ' ' + unit })));
+    }
+
+    function pct(part, whole) {
+      return whole ? '(' + Math.round(part / whole * 100) + '%)' : '';
+    }
+
+    function drawCharts() {
+      chartQueue.forEach(function (c) { drawLineChart(c.host, c.cfg); });
+    }
+
+    function renderRanges() {
+      var group = document.getElementById('ranges');
+      group.replaceChildren();
+      RANGES.forEach(function (r) {
+        var b = el('button', { type: 'button', 'aria-pressed': String(r.id === state.range), text: r.label });
+        b.addEventListener('click', function () {
+          if (state.range === r.id) return;
+          state.range = r.id;
+          try { localStorage.setItem('admin_range', r.id); } catch (e) {}
+          renderRanges();
+          load();
+        });
+        group.append(b);
+      });
+    }
+
+    // ---------- Data ----------
+
+    async function load() {
+      var r = currentRange();
+      var from = null;
+      if (r.days) {
+        from = new Date();
+        from.setHours(0, 0, 0, 0);
+        from.setDate(from.getDate() - (r.days - 1));
+      }
+      var dash = document.getElementById('dash');
+      dash.classList.add('loading');
+      var token = (state.request = {});
+      var result = await client.rpc('admin_dashboard', {
+        p_from: from ? from.toISOString() : null,
+        p_to: null,
+        p_bucket: r.bucket,
+        p_tz: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+      });
+      if (token !== state.request) return;  // a newer range was picked meanwhile
+      dash.classList.remove('loading');
+
+      if (result.error) {
+        if ((result.error.message || '').indexOf('not_authorized') !== -1) {
+          document.getElementById('denied-text').textContent = 'This account is not a super user, so the dashboard is not available to it.';
+          show('denied');
+        } else {
+          document.getElementById('updated').textContent = 'Could not load: ' + (result.error.message || 'unknown error');
+        }
+        return;
+      }
+      state.data = result.data;
+      show('dash');
+      render();
+    }
+
+    // ---------- Auth ----------
+
+    async function onSession(session) {
+      var nav = document.getElementById('nav-user');
+      if (!session) {
+        nav.classList.add('hidden');
+        state.data = null;
+        show('sign-in');
+        return;
+      }
+      document.getElementById('user-email').textContent = session.user.email || '';
+      nav.classList.remove('hidden');
+      renderRanges();
+      show('dash');
+      load();
+    }
+
+    document.getElementById('sign-in-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var button = document.getElementById('sign-in-button');
+      var error = document.getElementById('sign-in-error');
+      error.textContent = '';
+      button.disabled = true;
+      var res = await client.auth.signInWithPassword({
+        email: document.getElementById('email').value.trim(),
+        password: document.getElementById('password').value
+      });
+      button.disabled = false;
+      if (res.error) {
+        error.textContent = res.error.message || 'Could not sign in.';
+        return;
+      }
+      document.getElementById('password').value = '';
+      onSession(res.data.session);
+    });
+
+    async function signOut() {
+      await client.auth.signOut();
+      onSession(null);
+    }
+
+    document.getElementById('sign-out').addEventListener('click', signOut);
+    document.getElementById('denied-sign-out').addEventListener('click', signOut);
+    document.getElementById('refresh').addEventListener('click', load);
+
+    // Charts are drawn at the container's width and with the theme's colours,
+    // so redraw on resize and when the system theme flips.
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(drawCharts, 150);
+    });
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+    }
+
+    client.auth.getSession().then(function (res) { onSession(res.data.session); });
+  </script>
+</body>
+</html>
